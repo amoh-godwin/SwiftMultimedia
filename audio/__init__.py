@@ -54,7 +54,7 @@ class Audio:
             print('it exist')
             return pos_wav_file
 
-    def play(self, file, fFormat, size):
+    def play(self, file, size):
 
         """
         """
@@ -65,10 +65,10 @@ class Audio:
         print('self file: ', self.file)
         if self.file:
             self.file_size = int(size)
-            play_thread = threading.Thread(target=self._play, args=[fFormat])
+            play_thread = threading.Thread(target=self._play)
             play_thread.start()
 
-    def _play(self, fFormat):
+    def _play(self):
 
         """
         """
@@ -294,4 +294,4 @@ class Audio:
 
 aud = Audio()
 
-aud.play('H:/GitHub/SwiftMultimedia/audio/data/music/espeak.wav', 'wav', '128464')
+aud.play('H:/GitHub/SwiftMultimedia/audio/data/music/espeak.wav', '128464')
