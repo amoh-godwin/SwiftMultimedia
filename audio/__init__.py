@@ -54,7 +54,7 @@ class Audio:
             print('it exist')
             return pos_wav_file
 
-    def play(self, file, size):
+    def play(self, file):
 
         """
         """
@@ -62,9 +62,8 @@ class Audio:
         self._not_stopped = False
         #sleep(2)
         self.file = self.converter(file)
-        print('self file: ', self.file)
         if self.file:
-            self.file_size = int(size)
+            self.file_size = os.stat(self.file).st_size
             play_thread = threading.Thread(target=self._play)
             play_thread.start()
 
@@ -294,4 +293,4 @@ class Audio:
 
 aud = Audio()
 
-aud.play('H:/GitHub/SwiftMultimedia/audio/data/music/espeak.wav', '128464')
+aud.play('H:/GitHub/SwiftMultimedia/audio/data/music/espeak.wav')
