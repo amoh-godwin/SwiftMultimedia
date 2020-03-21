@@ -21,6 +21,7 @@ class Audio:
 
 
     def __init__(self):
+        t1 = time()
         self.file = ''
         self.file_size = 0
         self.app_running = True
@@ -31,6 +32,27 @@ class Audio:
         self.volume_val = 1.4
         self.ff = Ffmpeg()
         print(threading.enumerate())
+        t2 = time()
+        print('time is: ', t2-t1)
+
+    def converter(self, file):
+
+        """
+        Converts the audio file to a .wav format
+        """
+        
+        print('converter has been called')
+
+        split = os.path.splitext(file)
+        pos_wav_file = split[0] + '.wav'
+        ext = split[1]
+
+        # If it's corresponding .wav file already exists
+        if not os.path.exists(pos_wav_file) and ext != '.wav':
+            return self.ff.convert(file)
+        else:
+            print('it exist')
+            return pos_wav_file
 
     def play(self, file, fFormat, size):
 
@@ -38,11 +60,13 @@ class Audio:
         """
 
         self._not_stopped = False
-        sleep(2)
-        self.file = file
-        self.file_size = int(size)
-        play_thread = threading.Thread(target=self._play, args=[fFormat])
-        play_thread.start()
+        #sleep(2)
+        self.file = self.converter(file)
+        print('self file: ', self.file)
+        if self.file:
+            self.file_size = int(size)
+            play_thread = threading.Thread(target=self._play, args=[fFormat])
+            play_thread.start()
 
     def _play(self, fFormat):
 
@@ -52,12 +76,6 @@ class Audio:
         splits = os.path.split(self.file)
         filename = splits[1].replace(fFormat, 'wav')
         file = self.ff.sav_dir + '/' + filename
-
-        if self.app_running:
-            self.ff.convert(self.file, fFormat)
-
-        else:
-            return 1
 
         print('quick or ')
 

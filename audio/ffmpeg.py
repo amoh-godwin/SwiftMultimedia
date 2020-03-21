@@ -72,13 +72,12 @@ class Ffmpeg():
         return info
 
 
-    def convert(self, input_file, format_name):
+    def convert(self, input_file):
 
 
         i = input_file.replace("\\", "/")
-        splits = os.path.split(i)
-        file = splits[1]
-        file = file.replace('.' + format_name, '')
+        file = os.path.split(i)[1]
+        file = os.path.splitext(file)[0]
         file = file + '.wav'
         o = self.sav_dir + "/" + file
 
@@ -89,7 +88,7 @@ class Ffmpeg():
                 o
                 ], shell=True)
 
-        return 0
+        return o
     
 
 
