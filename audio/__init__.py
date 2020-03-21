@@ -73,15 +73,11 @@ class Audio:
         """
         """
 
-        splits = os.path.split(self.file)
-        filename = splits[1].replace(fFormat, 'wav')
-        file = self.ff.sav_dir + '/' + filename
-
         print('quick or ')
 
         pyaud = pyaudio.PyAudio()
 
-        wf = wave.open(file, mode='rb')
+        wf = wave.open(self.file, mode='rb')
 
         stream = pyaud.open(format=pyaud.get_format_from_width(wf.getsampwidth()),
                 channels=wf.getnchannels(),
