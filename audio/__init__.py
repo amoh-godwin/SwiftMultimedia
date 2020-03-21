@@ -5,7 +5,7 @@ Created on Fri Mar 20 11:41:43 2020
 @author: Ampofo
 """
 import os
-from time import sleep
+from time import sleep, time
 import threading
 import wave
 import numpy as np
@@ -83,6 +83,7 @@ class Audio:
 
             if self._not_stopped:
                 if self._not_paused:
+                    print('not paused')
 
                     stream.write(a)
                     #a = wf.readframes(512)
@@ -144,6 +145,7 @@ class Audio:
         """
         """
 
+        print('paused init')
         self._not_paused = False
         return
 
@@ -277,4 +279,5 @@ class Audio:
 
 
 aud = Audio()
+
 aud.play('H:/GitHub/SwiftMultimedia/audio/data/music/espeak.wav', 'wav', '128464')
