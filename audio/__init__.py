@@ -21,7 +21,6 @@ class Audio:
 
 
     def __init__(self):
-        t1 = time()
         self.file = ''
         self.file_size = 0
         self.app_running = True
@@ -32,8 +31,6 @@ class Audio:
         self.volume_val = 1.4
         self.ff = Ffmpeg()
         print(threading.enumerate())
-        t2 = time()
-        print('time is: ', t2-t1)
 
     def converter(self, file):
 
@@ -42,14 +39,17 @@ class Audio:
         """
         
         print('converter has been called')
-
+        t1 = time()
         split = os.path.splitext(file)
         pos_wav_file = split[0] + '.wav'
         ext = split[1]
 
         # If it's corresponding .wav file already exists
-        if not os.path.exists(pos_wav_file) and ext != '.wav':
-            return self.ff.convert(file)
+        if True: #not os.path.exists(pos_wav_file) and ext != '.wav':
+            ff = self.ff.convert(file)
+            t2 = time()
+            print('The time is: ', t2-t1)
+            return ff
         else:
             print('it exist')
             return pos_wav_file
@@ -76,6 +76,7 @@ class Audio:
 
         pyaud = pyaudio.PyAudio()
 
+        print('self: ', self.file)
         wf = wave.open(self.file, mode='rb')
 
         stream = pyaud.open(format=pyaud.get_format_from_width(wf.getsampwidth()),
@@ -83,6 +84,7 @@ class Audio:
                 rate=wf.getframerate(),
                 output=True)
 
+        print('rate: ', wf.getframerate())
         # self.playing()
         self._not_stopped = True
         self._not_paused = True
@@ -123,6 +125,9 @@ class Audio:
 
         pyaud.terminate()
         self.complete()
+
+    def prepare(self):
+        pass
 
     def stop(self):
 

@@ -10,12 +10,13 @@ class Ffmpeg():
         self.ffmpeg = '/bin/ffmpeg.exe'
         self.ffprobe = '/bin/ffprobe.exe'
         self.wdir = os.getcwd()
-        self.sav_dir = 'H:/GitHub/SwiftMultimedia/audio/data/music'
+        self.sav_dir = 'H:/GitHub/SwiftMultimedia/audio/data/music/saves'
 
         if not os.path.exists(self.sav_dir):
             os.mkdir(self.sav_dir)
         
         os.chdir('bin/')
+        print('cwd: ', os.getcwd())
         #i = 'C:\\Users\\GODWIN\\Music\\Joyce-Blessing-–-I-Swerve-You-Prod.-By-Linkin-www.Ghanasongs.com_.mp3'
         #self.probe(i)
         #self.convert(i, 'mp3')
