@@ -126,8 +126,15 @@ class Audio:
         pyaud.terminate()
         self.complete()
 
-    def prepare(self):
-        pass
+    def prepare(self, file):
+
+        """
+        """
+
+        self.file = self.converter(file)
+        if self.file:
+            self.file_size = os.stat(self.file).st_size
+        return True
 
     def stop(self):
 
@@ -298,4 +305,4 @@ class Audio:
 
 aud = Audio()
 
-aud.play('H:/GitHub/SwiftMultimedia/audio/data/music/espeak.wav')
+aud.prepare('H:/GitHub/SwiftMultimedia/audio/data/music/espeak.wav')
