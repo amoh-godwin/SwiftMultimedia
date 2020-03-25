@@ -30,7 +30,6 @@ class Audio:
         self.tt_played = 0
         self.volume_val = 1.4
         self.ff = Ffmpeg()
-        print(threading.enumerate())
 
     def converter(self, file):
 
