@@ -54,6 +54,29 @@ class Audio:
             print('it exist')
             return pos_wav_file
 
+    def delay_play(self, u_delay):
+
+        """
+        """
+
+        t1 = time()
+        delay = float(u_delay)
+        # Use a tenth (x/10) or use this 0.0156042575836182
+        if u_delay < 0.1:
+            r = 0.00000000000001#0.0156042575836182
+        else:
+            r = 0.001
+        delay = delay - r
+        self._not_stopped = False
+        sleep(delay)
+        play_thread = threading.Thread(target=self._play)
+        play_thread.start()
+        t2 = time()
+        
+        f_delay = t2-t1
+        print('delay: ', f_delay)
+        return(f_delay)
+
     def play(self, file):
 
         """
@@ -306,3 +329,4 @@ class Audio:
 aud = Audio()
 
 aud.prepare('H:/GitHub/SwiftMultimedia/audio/data/music/espeak.wav')
+aud.delay_play(1)
