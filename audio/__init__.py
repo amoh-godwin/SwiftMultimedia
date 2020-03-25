@@ -45,13 +45,15 @@ class Audio:
         ext = split[1]
 
         # If it's corresponding .wav file already exists
-        if True: #not os.path.exists(pos_wav_file) and ext != '.wav':
+        if not os.path.exists(pos_wav_file) and ext != '.wav':
             ff = self.ff.convert(file)
             t2 = time()
             print('The time is: ', t2-t1)
             return ff
         else:
             print('it exist')
+            t2 = time()
+            print('The time is: ', t2-t1)
             return pos_wav_file
 
     def delay_play(self, u_delay):
