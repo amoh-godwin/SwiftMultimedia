@@ -62,7 +62,9 @@ class Audio:
         t1 = time()
         delay = float(u_delay)
         # Use a tenth (x/10) or use this 0.0156042575836182
-        if u_delay < 0.1:
+        if u_delay == 0:
+            r = 0
+        elif u_delay < 0.1:
             r = 0.00000000000001#0.0156042575836182
         else:
             r = 0.001
@@ -329,4 +331,4 @@ class Audio:
 aud = Audio()
 
 aud.prepare('H:/GitHub/SwiftMultimedia/audio/data/music/espeak.wav')
-aud.delay_play(1)
+aud.delay_play(0.00000)
